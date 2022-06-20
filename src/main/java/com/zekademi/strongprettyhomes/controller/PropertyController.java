@@ -79,17 +79,15 @@ public class PropertyController {
 
     @GetMapping("/search")
     public Object searchProperties(
-            @Or({
+            @And({
                     @Spec(path = "title", params = "title", spec = LikeIgnoreCase.class),
-                    @Spec(path = "type", params = "type", spec = LikeIgnoreCase.class),
-                    @Spec(path = "status", params = "status", spec = LikeIgnoreCase.class),
+                    @Spec(path = "type", params = "type", spec = EqualIgnoreCase.class),
+                    @Spec(path = "status", params = "status", spec = EqualIgnoreCase.class),
                     @Spec(path = "bedrooms", params = "bedrooms", spec = LikeIgnoreCase.class),
                     @Spec(path = "bathrooms", params = "bathrooms", spec = LikeIgnoreCase.class),
                     @Spec(path = "country", params = "country", spec = LikeIgnoreCase.class),
                     @Spec(path = "city", params = "city", spec = LikeIgnoreCase.class),
                     @Spec(path = "district", params = "district", spec = LikeIgnoreCase.class),
-
-            }) @And({
                     @Spec(path = "price", params = "lowPrice", spec = GreaterThanOrEqual.class),
                     @Spec(path = "price", params = "highPrice", spec = LessThanOrEqual.class)
             }) Specification<Property> customerNameSpec) {
