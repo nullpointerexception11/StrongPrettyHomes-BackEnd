@@ -1,7 +1,5 @@
 package com.zekademi.strongprettyhomes.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.zekademi.strongprettyhomes.domain.Property;
 import com.zekademi.strongprettyhomes.domain.TourRequest;
 import com.zekademi.strongprettyhomes.domain.enumeration.TourRequestStatus;
 
