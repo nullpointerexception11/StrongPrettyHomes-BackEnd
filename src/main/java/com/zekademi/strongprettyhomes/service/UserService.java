@@ -49,6 +49,7 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setBuiltIn(false);
+       // user.setIsLiked(false);
 
         Role customerRole = roleRepository.findByName(UserRole.ROLE_CUSTOMER)
                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
@@ -118,8 +119,9 @@ public class UserService {
 
         String userRoles = adminDTO.getRole();
         Role roles = addRoles(userRoles);
-        User user = new User(adminDTO.getFirstName(), adminDTO.getLastName(), adminDTO.getPassword(),
-                adminDTO.getPhoneNumber(), adminDTO.getEmail(), adminDTO.getAddress(), adminDTO.getZipCode());
+        User user = new User(id, adminDTO.getFirstName(), adminDTO.getLastName(), adminDTO.getPassword(),
+                adminDTO.getPhoneNumber(), adminDTO.getEmail(), adminDTO.getAddress(), adminDTO.getZipCode(),
+                roles, adminDTO.getBuiltIn());
         userRepository.save(user);
 
     }
@@ -151,6 +153,4 @@ public class UserService {
 
         userRepository.deleteById(id);
     }
-
-
 }

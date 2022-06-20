@@ -1,7 +1,7 @@
 package com.zekademi.strongprettyhomes.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zekademi.strongprettyhomes.domain.enumeration.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -66,6 +66,7 @@ public class User  {
     @Column(nullable = false, length = 15)
     private String zipCode;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roles_id", referencedColumnName = "id")
     private Role role;
@@ -73,6 +74,13 @@ public class User  {
     @Column(nullable = false)
     private Boolean builtIn;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<TourRequest> tourRequests;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Review> reviews= new HashSet<>();
 
     public User( String firstName, String lastName, String password, String phoneNumber, String email,
                 String address, String zipCode) {
@@ -97,6 +105,19 @@ public class User  {
         this.role = roles;
         this.builtIn = builtIn;
     }
+    public User(Long id, String firstName, String lastName, String password, String phoneNumber,
+                String email, String address, String zipCode, Role roles, Boolean builtIn) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.role = roles;
+        this.builtIn = builtIn;
+    }
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -106,7 +127,6 @@ public class User  {
 
         if (role.getName().equals(UserRole.ROLE_ADMIN))
             return "Administrator";
-
         return "User";
     }
 }
