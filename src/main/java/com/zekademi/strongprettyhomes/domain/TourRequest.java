@@ -55,7 +55,7 @@ public class TourRequest {
     @Enumerated(EnumType.STRING)
     @Column(length = 30, nullable = false)
     @NotNull(message = "Please enter the TourRequest status")
-    private TourRequestStatus status="PENDING";
+    private TourRequestStatus status;
 
 }
 
