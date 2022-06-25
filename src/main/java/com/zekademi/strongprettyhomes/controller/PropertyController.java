@@ -80,18 +80,20 @@ public class PropertyController {
     @GetMapping("/search")
     public Object searchProperties(
             @And({
-                    @Spec(path = "title", params = "title", spec = LikeIgnoreCase.class),
                     @Spec(path = "type", params = "type", spec = EqualIgnoreCase.class),
                     @Spec(path = "status", params = "status", spec = EqualIgnoreCase.class),
                     @Spec(path = "bedrooms", params = "bedrooms", spec = LikeIgnoreCase.class),
                     @Spec(path = "bathrooms", params = "bathrooms", spec = LikeIgnoreCase.class),
-                    @Spec(path = "country", params = "country", spec = LikeIgnoreCase.class),
-                    @Spec(path = "city", params = "city", spec = LikeIgnoreCase.class),
-                    @Spec(path = "district", params = "district", spec = LikeIgnoreCase.class),
+                    @Spec(path = "area", params = "minArea", spec = GreaterThanOrEqual.class),
+                    @Spec(path = "area", params = "maxArea", spec = LessThanOrEqual.class),
                     @Spec(path = "price", params = "lowPrice", spec = GreaterThanOrEqual.class),
                     @Spec(path = "price", params = "highPrice", spec = LessThanOrEqual.class)
+            }) @Or({
+                    @Spec(path = "country", params = "location", spec = LikeIgnoreCase.class),
+                    @Spec(path = "city", params = "location", spec = LikeIgnoreCase.class),
+                    @Spec(path = "district", params = "location", spec = LikeIgnoreCase.class),
+                    @Spec(path = "address", params = "location", spec = LikeIgnoreCase.class),
             }) Specification<Property> customerNameSpec) {
-
         return propertyRepository.findAll(customerNameSpec);
     }
     
