@@ -45,21 +45,19 @@ public class PropertyService {
     }
 
     public void add(Property property, Agent agentId, Long detailId) throws BadRequestException {
-
         property.setVisitCount(0L);
-
+        property.setLikeCount(0L);
         Agent agent = agentRepository.findById(agentId.getId()).orElseThrow(() ->
                 new ResourceNotFoundException(String.format(AGENT_NOT_FOUND_MSG, agentId.getId())));
         property.setAgent(agent);
-
         PropertyDetail propertyDetail = propertyDetailRepository.findById(detailId).orElseThrow(() ->
                 new ResourceNotFoundException(String.format(AGENT_NOT_FOUND_MSG, detailId)));
         Set<PropertyDetail> details = new HashSet<>();
         details.add(propertyDetail);
         property.setPropertyDetails(details);
-
         propertyRepository.save(property);
     }
+
 
     public void updateProperty(Long id, Property property, Long agentId, Long detailId) throws BadRequestException {
         property.setId(id);
