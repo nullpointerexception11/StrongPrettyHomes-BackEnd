@@ -39,22 +39,16 @@ public class TourRequestService {
     }
 
     public void addTourRequest(TourRequest tourRequest, Long userId, Property propertyId) throws BadRequestException {
-        
         boolean checkStatus = homeAvailability(propertyId.getId(), tourRequest.getTourRequestTime());
-
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new ResourceNotFoundException(String.format(USER_NOT_FOUND_MSG, userId)));
-
-        if (!checkStatus) tourRequest.setStatus(TourRequestStatus.PENDING);
-        else throw new BadRequestException("Property is already reserved! Please choose another Time");
-        
+        if (checkStatus) throw new BadRequestException("Property is already reserved! Please choose another Time");
         LocalDateTime today = LocalDateTime.now();
         if (today.compareTo(tourRequest.getTourRequestTime()) > 0)
             throw new BadRequestException("Invalid time and date !!!");
-
+        tourRequest.setStatus(TourRequestStatus.PENDING);
         tourRequest.setProperty(propertyId);
         tourRequest.setUser(user);
-
         tourRequestRepository.save(tourRequest);
     }
 
