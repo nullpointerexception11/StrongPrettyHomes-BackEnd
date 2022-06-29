@@ -81,7 +81,7 @@ public class PropertyController {
     public Object searchProperties(
             @And({
                     @Spec(path = "type", params = "type", spec = EqualIgnoreCase.class),
-                    @Spec(path = "status", params = "status", spec = EqualIgnoreCase.class),
+                    @Spec(path = "category", params = "category", spec = EqualIgnoreCase.class),
                     @Spec(path = "bedrooms", params = "bedrooms", spec = LikeIgnoreCase.class),
                     @Spec(path = "bathrooms", params = "bathrooms", spec = LikeIgnoreCase.class),
                     @Spec(path = "area", params = "minArea", spec = GreaterThanOrEqual.class),
