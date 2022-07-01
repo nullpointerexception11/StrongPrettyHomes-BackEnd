@@ -18,7 +18,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long>, JpaSp
 
     @Transactional
     @Query("SELECT new com.zekademi.strongprettyhomes.dto.PropertyDTO(c) FROM Property c")
-    List<PropertyDTO> findAllProperty();
+    List<PropertyDTO> findAll(Specification<Property> specification);
 
     @Transactional
     @Query("SELECT new com.zekademi.strongprettyhomes.dto.PropertyDTO(c) FROM Property c WHERE c.id = ?1")
