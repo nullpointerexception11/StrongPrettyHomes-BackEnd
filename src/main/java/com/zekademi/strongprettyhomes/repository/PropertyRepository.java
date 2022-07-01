@@ -24,7 +24,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long>, JpaSp
     @Query("SELECT new com.zekademi.strongprettyhomes.dto.PropertyDTO(c) FROM Property c WHERE c.id = ?1")
     Optional<PropertyDTO> findPropertyByIdx(Long id) throws ResourceNotFoundException;
 
-    List<Property> findAll(Specification<Property> specification);
+    List<PropertyDTO> findAll(Specification<Property> specification);
 
     Long findPropertyByVisitCount(Long Id) throws ResourceNotFoundException;
 }
