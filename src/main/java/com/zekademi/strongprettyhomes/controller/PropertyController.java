@@ -93,7 +93,7 @@ public class PropertyController {
                     @Spec(path = "city", params = "location", spec = LikeIgnoreCase.class),
                     @Spec(path = "district", params = "location", spec = LikeIgnoreCase.class),
                     @Spec(path = "address", params = "location", spec = LikeIgnoreCase.class),
-            }) Specification<Property> customerNameSpec) {
+            }) Specification<PropertyDTO> customerNameSpec) {
         return propertyRepository.findAll(customerNameSpec);
     }
     
