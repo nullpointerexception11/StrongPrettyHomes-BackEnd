@@ -30,8 +30,9 @@ public class ImageService {
                 new ResourceNotFoundException(String.format(PROPERTY_NOT_FOUND_MSG, id)));
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        boolean featured = false;
 
-        ImageDB imageDB = new ImageDB(fileName, file.getContentType(), file.getBytes(), property);
+        ImageDB imageDB = new ImageDB(fileName, file.getContentType(), file.getBytes(), featured, property);
 
         imageRepository.save(imageDB);
 

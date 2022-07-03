@@ -32,14 +32,16 @@ public class ImageDB {
 
     private Boolean featured;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "property_id")
     private Property property;
 
-    public ImageDB(String name, String type, byte[] image, Property property) {
+    public ImageDB(String name, String type, byte[] image, boolean featured, Property property) {
         this.name = name;
         this.type = type;
         this.image = image;
+        this.featured = featured;
         this.property = property;
     }
 

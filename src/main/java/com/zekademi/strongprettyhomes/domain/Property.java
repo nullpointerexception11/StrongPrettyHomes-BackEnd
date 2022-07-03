@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zekademi.strongprettyhomes.domain.enumeration.PropertyCategory;
 import com.zekademi.strongprettyhomes.domain.enumeration.PropertyStatus;
 import com.zekademi.strongprettyhomes.domain.enumeration.PropertyType;
+import com.zekademi.strongprettyhomes.dto.ImageDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +24,7 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "properties")
-public class Property {
+public class Property implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -104,11 +106,11 @@ public class Property {
     @Column(length = 30, nullable = false)
     private PropertyStatus status;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "property", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+   // @JsonIgnore
+    @OneToMany(mappedBy = "property", fetch = FetchType.EAGER)
     private Set<ImageDB> image;
 
-    @JsonIgnore
+   @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "agent_id", nullable = false)
     private Agent agent;
