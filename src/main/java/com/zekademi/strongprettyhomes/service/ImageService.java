@@ -22,7 +22,7 @@ public class ImageService {
     private PropertyRepository propertyRepository;
 
     private final static String PROPERTY_NOT_FOUND_MSG = "property with id %d not found";
-    private final static String IMAGE_NOT_FOUND_MSG = "image with id %d not found";
+    private final static String IMAGE_NOT_FOUND_MSG = "image with id %s not found";
 
     public ImageDB store(MultipartFile file, Long id) throws IOException {
 
@@ -30,9 +30,8 @@ public class ImageService {
                 new ResourceNotFoundException(String.format(PROPERTY_NOT_FOUND_MSG, id)));
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        boolean featured = false;
 
-        ImageDB imageDB = new ImageDB(fileName, file.getContentType(), file.getBytes(), featured, property);
+        ImageDB imageDB = new ImageDB(fileName, file.getContentType(), file.getBytes(), property);
 
         imageRepository.save(imageDB);
 
@@ -51,7 +50,7 @@ public class ImageService {
         ImageDB imageDB = imageRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException(String.format(IMAGE_NOT_FOUND_MSG, id)));
 
-        if (!imageDB.getFeatured()) imageDB.setFeatured(false);
+        if (imageDB.getFeatured()) imageDB.setFeatured(false);
         else imageDB.setFeatured(true);
 
         imageRepository.save(imageDB);
