@@ -51,7 +51,7 @@ public class ImageService {
         ImageDB imageDB = imageRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException(String.format(IMAGE_NOT_FOUND_MSG, id)));
 
-        if (!imageDB.getFeatured()) imageDB.setFeatured(false);
+        if (imageDB.getFeatured()) imageDB.setFeatured(false);
         else imageDB.setFeatured(true);
 
         imageRepository.save(imageDB);
