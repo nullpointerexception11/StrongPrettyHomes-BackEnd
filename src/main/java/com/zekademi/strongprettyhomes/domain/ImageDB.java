@@ -32,7 +32,7 @@ public class ImageDB {
 
     private Boolean featured;
 
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "property_id")
     private Property property;

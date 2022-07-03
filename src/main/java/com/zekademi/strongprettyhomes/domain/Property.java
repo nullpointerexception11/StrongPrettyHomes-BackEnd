@@ -106,7 +106,7 @@ public class Property implements Serializable {
     @Column(length = 30, nullable = false)
     private PropertyStatus status;
 
-   // @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "property", fetch = FetchType.EAGER)
     private Set<ImageDB> image;
 
