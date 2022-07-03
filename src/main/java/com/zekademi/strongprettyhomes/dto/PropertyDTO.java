@@ -51,6 +51,8 @@ public class PropertyDTO {
 
     private Long visitCount;
 
+    private Long likeCount;
+
     private PropertyStatus status;
 
     private Set<String> image;
@@ -78,6 +80,7 @@ public class PropertyDTO {
         this.district = property.getDistrict();
         this.createdDate = property.getCreateDate();
         this.visitCount = property.getVisitCount();
+        this.likeCount = property.getLikeCount();
         this.status = property.getStatus();
         this.image = getImageId(property.getImage());
         this.agent = property.getAgent();
