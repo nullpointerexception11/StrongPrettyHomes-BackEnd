@@ -51,7 +51,7 @@ public class Agent {
     private String email;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "agent")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "agent")
     private List<Property> properties = new ArrayList<>();
 
     @OneToOne

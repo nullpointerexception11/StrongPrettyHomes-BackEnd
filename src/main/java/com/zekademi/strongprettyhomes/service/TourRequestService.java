@@ -46,9 +46,9 @@ public class TourRequestService {
         LocalDateTime today = LocalDateTime.now();
         if (today.compareTo(tourRequest.getTourRequestTime()) > 0)
             throw new BadRequestException("Invalid time and date !!!");
-        tourRequest.setStatus(TourRequestStatus.PENDING);
         tourRequest.setProperty(propertyId);
         tourRequest.setUser(user);
+        tourRequest.setStatus(TourRequestStatus.PENDING);
         tourRequestRepository.save(tourRequest);
     }
 

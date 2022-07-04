@@ -110,7 +110,7 @@ public class Property implements Serializable {
     @OneToMany(mappedBy = "property", fetch = FetchType.EAGER)
     private Set<ImageDB> image;
 
-   @JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "agent_id", nullable = false)
     private Agent agent;
