@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class UserController {
 
-    public UserService userService;
+    private final UserService userService;
     public AuthenticationManager authenticationManager;
     public JwtUtils jwtUtils;
 

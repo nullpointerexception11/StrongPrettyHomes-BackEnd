@@ -27,8 +27,8 @@ import java.util.Map;
 @RequestMapping("/property")
 public class PropertyController {
 
-    public PropertyService propertyService;
-    public PropertyRepository propertyRepository;
+    private final PropertyService propertyService;
+    private final PropertyRepository propertyRepository;
 
     @GetMapping("/visitors/all")
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {

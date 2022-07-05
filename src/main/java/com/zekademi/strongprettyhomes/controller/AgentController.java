@@ -21,7 +21,8 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 @RequestMapping("/agent")
 public class AgentController {
-    public AgentService agentService;
+
+    private final AgentService agentService;
 
     @PostMapping("/admin/{imageId}/add")
     @PreAuthorize("hasRole('ADMIN')")

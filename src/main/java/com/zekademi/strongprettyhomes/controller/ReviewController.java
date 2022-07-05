@@ -29,7 +29,7 @@ import java.util.HashMap;
 public class ReviewController {
 
 
-    public ReviewService reviewService;
+    private final ReviewService reviewService;
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN') or hasRole('CUSTOMER')")

@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping("/tour")
 public class TourRequestController {
 
-    public TourRequestService tourRequestService;
+    private final TourRequestService tourRequestService;
 
     @GetMapping("/{id}/admin")
     @PreAuthorize("hasRole('ADMIN')")
