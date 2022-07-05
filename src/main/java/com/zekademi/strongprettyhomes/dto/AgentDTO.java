@@ -42,9 +42,7 @@ public class AgentDTO {
     @NotNull(message="Please enter agent's email")
     private String email;
 
-    @JsonIgnore
-    @Lob
-    private byte[] image;
+    private String image;
 
     private List<Property> properties;
 
@@ -54,7 +52,7 @@ public class AgentDTO {
         this.lastName = agent.getLastName();
         this.phoneNumber = agent.getPhoneNumber();
         this.email = agent.getEmail();
-        this.image = getImage();
+        this.image = agent.getAgentImage().getId();
         this.properties = agent.getProperties();
     }
 }
